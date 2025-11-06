@@ -1,9 +1,34 @@
-import React from 'react'
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import useArtStore from "../store/art-store";
+import { Box, Grid } from "@mui/material";
+import CardArt from "../components/Card";
+import Loading from "../components/Loading";
 
 const Detail = () => {
-  return (
-    <div>Detail</div>
-  )
-}
+  const { id } = useParams();
+  const getArtById = useArtStore((state) => state.getArtById);
+  const loading = useArtStore((state) => state.loading);
+  const errorArt = useArtStore((state) => state.errorArt);
+  const art = useArtStore((state) => state.art);
 
-export default Detail
+  useEffect(() => {
+    getArtById(id);
+  }, [id]);
+
+  return (
+    <>
+      {loading && (
+        <Loading />
+      )}
+      {errorArt && <Box> No encontrado </Box>}
+      {art && (
+        <Grid container>
+          <CardArt art={art} button={false} isDetail={true} />
+        </Grid>
+      )}
+    </>
+  );
+};
+
+export default Detail;
