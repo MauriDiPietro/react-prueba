@@ -1,17 +1,20 @@
-import UserProfile from "./components/UserProfile";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import EditUser from "./components/EditUser";
-import Tareas from "./components/Tareas";
-
+import Home from "./pages/Home";
+import Detail from "./pages/Detail";
+import Cart from "./pages/Cart";
+import Confirm from "./pages/Confirm";
+import Navbar from "./components/Navbar";
 
 function App() {
 return(
   <>
+    <Navbar/>
     <Routes>
-        <Route path="/" element={<UserProfile/>} />
-        <Route path="/edit" element={<EditUser/>} />
-        <Route path='/tareas' element={<Tareas/>} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/art/:id" element={<Detail/>} />
+        <Route path='/cart' element={<Cart/>} />
+        <Route path="/confirm" element={<Confirm/>} />
     </Routes>
   </>
 )
