@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useArtStore from "../store/art-store";
-import { Box, Grid } from "@mui/material";
-import CardArt from "../components/Card";
-import Loading from "../components/Loading";
+import useArtStore from "../../store/art-store";
+import { Grid } from "@mui/material";
+import CardArt from "../../components/Card";
+import Loading from "../../components/Loading";
+import Error from "../../components/Error";
 
 const Detail = () => {
   const { id } = useParams();
@@ -21,7 +22,7 @@ const Detail = () => {
       {loading && (
         <Loading />
       )}
-      {errorArt && <Box> No encontrado </Box>}
+      {errorArt && <Error message={'Error al obtener el detalle del producto'} />}
       {art && (
         <Grid container>
           <CardArt art={art} button={false} isDetail={true} />

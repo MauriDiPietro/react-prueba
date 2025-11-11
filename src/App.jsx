@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import { Box, Container } from "@mui/material";
-import Home from "./pages/Home";
-import Detail from "./pages/Detail";
-import Cart from "./pages/Cart";
+import Home from "./pages/home";
+import Detail from "./pages/detail";
+import Cart from "./pages/cart";
 import Navbar from "./components/Navbar";
 
 function App() {

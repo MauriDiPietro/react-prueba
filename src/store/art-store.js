@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { getArts, getArtById } from "../services/api-art";
 
-export const useArtStore = create((set) => ({
+const useArtStore = create((set) => ({
   arts: [],
   art: null,
   loading: false,
@@ -15,6 +15,8 @@ export const useArtStore = create((set) => ({
       {"total":1547,"objectIDs":[437056,764091,438345]}
       */
       const promises = ids.map((id) => getArtById(id));
+      //[<Promise>]
+
       const response = await Promise.all(promises);
       set({ arts: response });
     } catch {
