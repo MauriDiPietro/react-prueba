@@ -2,7 +2,7 @@ import axios from "axios";
 
 const URL = "https://collectionapi.metmuseum.org/public/collection/v1";
 
-export const getArts = async (q = "painting", limit = 10) => {
+export const getArts = async (q = "painting", limit = 12) => {
   try {
     const responseNoLimit = await axios.get(`${URL}/search`, {
       params: { q, hasImages: true },
