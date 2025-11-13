@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Button, Grid, Pagination, TextField } from "@mui/material";
+import { useEffect } from "react";
+import { Button, Grid, Pagination, TextField, Box } from "@mui/material";
 import CardArt from "../../components/Card";
 import Loading from "../../components/Loading";
 import Error from "../../components/Error";
@@ -23,40 +23,53 @@ const Home = () => {
   return (
     <>
       {error && <Error message={"Error al obtener el listado"} />}
-      {loading ? (
-        <Loading />
-      ) : (
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={12} md={12} lg={12}>
-            <TextField
-              label="Buscar por artista o título"
-              variant="outlined"
-              fullWidth
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <Button
-              variant="outlined"
-              onClick={getAllArts}
-              sx={{ backgroundColor: "#A01F26", color: "white" }}
-            >
-              Buscar
-            </Button>
-          </Grid>
-          {arts && arts.map((art) => (
-            <Grid item xs={12} sm={6} md={4} lg={4} key={art.objectID}>
+      {loading && <Loading />}
+
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+          alignItems: "center",
+          width: "100%",
+          mb: 3,
+        }}
+      >
+        <TextField
+          label="Buscar por artista o título"
+          variant="outlined"
+          fullWidth
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Button
+          variant="outlined"
+          onClick={getAllArts}
+          sx={{
+            backgroundColor: "#A01F26",
+            color: "white",
+            height: "56px",
+          }}
+        >
+          Buscar
+        </Button>
+      </Box>
+
+      <Grid container spacing={2}>
+        {arts &&
+          arts.map((art) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={art.objectID}>
               <CardArt art={art} button={true} isDetail={false} />
             </Grid>
           ))}
-          <Grid item xs={12} sm={12} md={12} lg={12}>
-          <Pagination 
-            count={totalPages}
-            page={page}
-            onChange={(value) => setPage(value)}
-          />  
-          </Grid>
-        </Grid>
-      )}
+      </Grid>
+
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={(e, value) => setPage(value)}
+        />
+      </Box>
     </>
   );
 };
